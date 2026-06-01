@@ -144,6 +144,9 @@ public class SpotServiceImpl implements SpotService {
             if (category == null) {
                 throw BusinessException.badRequest("指定的分类不存在");
             }
+            if (!"ON".equals(category.getStatus())) {
+                throw BusinessException.badRequest("指定的分类已禁用");
+            }
         }
     }
 
