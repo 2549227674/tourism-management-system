@@ -9,9 +9,9 @@
 -- user02 → user123
 
 INSERT INTO sys_user (username, password_hash, nickname, phone, email, role, status) VALUES
-('admin',  '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVKIUi', '管理员',   '13800000000', 'admin@example.com',  'ADMIN', 'ENABLED'),
-('user01', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVKIUi', '张三',     '13800000001', 'user01@example.com', 'USER',  'ENABLED'),
-('user02', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVKIUi', '李四',     '13800000002', 'user02@example.com', 'USER',  'ENABLED');
+('admin',  '$2a$10$nhDKy4cAMoylQ5rVFB5I2.SHXfpEFxX3QvcI4TyHTxJNQs4VESvvq', '管理员',   '13800000000', 'admin@example.com',  'ADMIN', 'ENABLED'),
+('user01', '$2a$10$4888Mud8sA.0sBNbmxWePuC3zURfTt2pJW4WEBsZh/dxz1yq1k2oG', '张三',     '13800000001', 'user01@example.com', 'USER',  'ENABLED'),
+('user02', '$2a$10$4888Mud8sA.0sBNbmxWePuC3zURfTt2pJW4WEBsZh/dxz1yq1k2oG', '李四',     '13800000002', 'user02@example.com', 'USER',  'ENABLED');
 
 -- ===================== 景点分类 =====================
 
@@ -44,6 +44,28 @@ INSERT INTO tour_route (name, itinerary, price, departure_time, quota, booked_co
 ('温泉养生两日游',     'Day1: 温泉度假村入住 + 温泉体验；Day2: 森林公园漫步 + 返程。',                                 588.00,  '2026-07-15 08:00:00', 20,  3,  'OPEN',   '/images/route-wenquan.jpg'),
 ('碧海沙滩周末游',     '周六 08:00 出发；10:00 抵达碧海沙滩；自由活动；周日 15:00 返回。',                              358.00,  '2026-07-20 08:00:00', 35,  0,  'DRAFT',  '/images/route-bihai.jpg'),
 ('全景三日游',         'Day1: 青山湖 + 森林公园；Day2: 古城墙 + 千年古寺；Day3: 温泉度假村。',                         888.00,  '2026-08-01 08:00:00', 15,  0,  'CLOSED', '/images/route-quanjing.jpg');
+
+-- ===================== 订单 =====================
+-- booked_count = PENDING + CONFIRMED 的 people_count 之和
+-- CANCELLED / REJECTED / COMPLETED 不计入 booked_count（名额已释放）
+
+INSERT INTO tour_order (order_no, user_id, route_id, people_count, contact_name, contact_phone, total_amount, status, remark, created_at) VALUES
+-- 青山湖一日游 (route_id=1, price=199, booked_count=5 → PENDING 2 + CONFIRMED 3)
+('TR202606180001', 2, 1, 2, '张三', '13800000001',  398.00, 'PENDING',   NULL,              '2026-06-18 10:00:00'),
+('TR202606160001', 3, 1, 3, '李四', '13800000002',  597.00, 'CONFIRMED', NULL,              '2026-06-16 14:00:00'),
+('TR202606120001', 3, 1, 2, '李四', '13800000002',  398.00, 'CANCELLED', '临时有事，取消预订', '2026-06-12 09:00:00'),
+-- 古城文化两日游 (route_id=2, price=399, booked_count=12 → PENDING 4 + CONFIRMED 8)
+('TR202606200001', 3, 2, 4, '李四', '13800000002', 1596.00, 'PENDING',   NULL,              '2026-06-20 11:00:00'),
+('TR202606140001', 2, 2, 5, '张三', '13800000001', 1995.00, 'CONFIRMED', NULL,              '2026-06-14 09:00:00'),
+('TR202606100001', 2, 2, 3, '张三', '13800000001', 1197.00, 'CONFIRMED', NULL,              '2026-06-10 16:00:00'),
+('TR202606080001', 3, 2, 2, '李四', '13800000002',  798.00, 'REJECTED',  '该线路临时调整，暂不接受预订', '2026-06-08 15:00:00'),
+-- 欢乐世界亲子一日游 (route_id=3, price=299, booked_count=40 → CONFIRMED 40)
+('TR202606050001', 2, 3, 15, '张三', '13800000001', 4485.00, 'CONFIRMED', NULL,             '2026-06-05 08:00:00'),
+('TR202606060001', 3, 3, 25, '李四', '13800000002', 7475.00, 'CONFIRMED', NULL,             '2026-06-06 09:00:00'),
+-- 温泉养生两日游 (route_id=4, price=588, booked_count=3 → PENDING 3)
+('TR202606250001', 2, 4, 3, '张三', '13800000001', 1764.00, 'PENDING',   NULL,              '2026-06-25 10:00:00'),
+-- 额外演示数据：已完成订单
+('TR202605200001', 3, 2, 4, '李四', '13800000002', 1596.00, 'COMPLETED', '行程顺利，已完结', '2026-05-20 08:00:00');
 
 -- ===================== 公告 =====================
 
