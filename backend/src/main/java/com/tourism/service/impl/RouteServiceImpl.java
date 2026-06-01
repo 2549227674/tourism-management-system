@@ -74,6 +74,7 @@ public class RouteServiceImpl implements RouteService {
             );
         }
         if (status != null && !status.isBlank()) {
+            validateStatus(status);
             wrapper.eq(TourRoute::getStatus, status);
         }
         wrapper.orderByDesc(TourRoute::getCreatedAt);
@@ -125,19 +126,20 @@ public class RouteServiceImpl implements RouteService {
         validateRequest(request);
         validatePrice(request.getPrice());
         validateQuota(request.getQuota());
-        validateBookedCount(request.getBookedCount(), request.getQuota());
         if (request.getStatus() != null) {
             validateStatus(request.getStatus());
         }
+
+        int finalBookedCount = request.getBookedCount() != null ? request.getBookedCount() : route.getBookedCount();
+        int finalQuota = request.getQuota();
+        validateBookedCount(finalBookedCount, finalQuota);
 
         route.setName(request.getName());
         route.setItinerary(request.getItinerary());
         route.setPrice(request.getPrice());
         route.setDepartureTime(request.getDepartureTime());
-        route.setQuota(request.getQuota());
-        if (request.getBookedCount() != null) {
-            route.setBookedCount(request.getBookedCount());
-        }
+        route.setQuota(finalQuota);
+        route.setBookedCount(finalBookedCount);
         if (request.getStatus() != null) {
             route.setStatus(request.getStatus());
         }
