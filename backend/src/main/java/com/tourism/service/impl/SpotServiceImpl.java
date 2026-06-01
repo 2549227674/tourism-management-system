@@ -47,8 +47,8 @@ public class SpotServiceImpl implements SpotService {
     @Override
     public SpotDTO getDetail(Long id) {
         ScenicSpot spot = spotMapper.selectById(id);
-        if (spot == null) {
-            throw BusinessException.notFound("景点不存在");
+        if (spot == null || !"ON".equals(spot.getStatus())) {
+            throw BusinessException.notFound("景点不存在或已下架");
         }
         return toDTO(spot);
     }
@@ -78,6 +78,8 @@ public class SpotServiceImpl implements SpotService {
 
     @Override
     public SpotDTO create(SpotRequest request) {
+        validateCategoryId(request.getCategoryId());
+
         ScenicSpot spot = new ScenicSpot();
         spot.setName(request.getName());
         spot.setCategoryId(request.getCategoryId());
@@ -98,6 +100,8 @@ public class SpotServiceImpl implements SpotService {
         if (spot == null) {
             throw BusinessException.notFound("景点不存在");
         }
+
+        validateCategoryId(request.getCategoryId());
 
         spot.setName(request.getName());
         spot.setCategoryId(request.getCategoryId());
@@ -122,12 +126,25 @@ public class SpotServiceImpl implements SpotService {
 
     @Override
     public void updateStatus(Long id, String status) {
+        if (!"ON".equals(status) && !"OFF".equals(status)) {
+            throw BusinessException.badRequest("状态值只能是 ON 或 OFF");
+        }
+
         ScenicSpot spot = spotMapper.selectById(id);
         if (spot == null) {
             throw BusinessException.notFound("景点不存在");
         }
         spot.setStatus(status);
         spotMapper.updateById(spot);
+    }
+
+    private void validateCategoryId(Long categoryId) {
+        if (categoryId != null) {
+            SpotCategory category = categoryMapper.selectById(categoryId);
+            if (category == null) {
+                throw BusinessException.badRequest("指定的分类不存在");
+            }
+        }
     }
 
     private Page<SpotDTO> convertPage(Page<ScenicSpot> page) {

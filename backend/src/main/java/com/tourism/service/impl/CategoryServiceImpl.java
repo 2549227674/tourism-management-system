@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.tourism.common.BusinessException;
 import com.tourism.dto.CategoryDTO;
 import com.tourism.dto.CategoryRequest;
+import com.tourism.entity.ScenicSpot;
 import com.tourism.entity.SpotCategory;
+import com.tourism.mapper.ScenicSpotMapper;
 import com.tourism.mapper.SpotCategoryMapper;
 import com.tourism.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     private final SpotCategoryMapper categoryMapper;
+    private final ScenicSpotMapper spotMapper;
 
     @Override
     public List<CategoryDTO> listAll() {
@@ -85,6 +88,14 @@ public class CategoryServiceImpl implements CategoryService {
         if (category == null) {
             throw BusinessException.notFound("分类不存在");
         }
+
+        Long spotCount = spotMapper.selectCount(
+                new LambdaQueryWrapper<ScenicSpot>().eq(ScenicSpot::getCategoryId, id)
+        );
+        if (spotCount > 0) {
+            throw BusinessException.conflict("该分类下存在 " + spotCount + " 个景点，无法删除");
+        }
+
         categoryMapper.deleteById(id);
     }
 }
