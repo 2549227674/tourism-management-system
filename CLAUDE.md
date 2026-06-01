@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 项目性质：软件工程课程设计
 目标：完成一个小型、可运行、文档完整的 Web 系统。
 
-**当前状态：** 纯文档阶段，尚无源代码、构建文件或数据库脚本。开发按 `docs/dev/07-项目开发计划与任务分工.md` 计划执行。
+**当前状态：** 后端骨架已搭建（用户注册、登录、JWT 认证），其余业务模块待开发。开发按 `docs/dev/07-项目开发计划与任务分工.md` 计划执行。
 
 系统功能范围：
 
