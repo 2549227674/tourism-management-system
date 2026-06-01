@@ -106,7 +106,7 @@ tourism-management-system/
 │       ├── stores/              # Pinia 状态管理（认证等）
 │       └── utils/               # Axios 实例、工具函数
 ├── database/
-│   ├── schema.sql               # DDL（7 张表）
+│   ├── schema.sql               # DDL（8 张表）
 │   └── data.sql                 # 初始化数据（管理员 + 测试用户）
 └── docs/                        # 课程交付文档 + 开发指导文档
 ```
