@@ -16,11 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
+
+    private static final Set<String> VALID_STATUSES = Set.of("PENDING", "CONFIRMED", "CANCELLED", "REJECTED", "COMPLETED");
 
     private final TourOrderMapper orderMapper;
     private final TourRouteMapper routeMapper;
@@ -69,6 +72,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<OrderDTO> listMyOrders(Long userId, int page, int pageSize, String status) {
+        if (status != null && !status.isBlank()) {
+            validateStatus(status);
+        }
+
         LambdaQueryWrapper<TourOrder> wrapper = new LambdaQueryWrapper<TourOrder>()
                 .eq(TourOrder::getUserId, userId);
         if (status != null && !status.isBlank()) {
@@ -112,6 +119,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<OrderDTO> listAdmin(int page, int pageSize, String keyword, String status) {
+        if (status != null && !status.isBlank()) {
+            validateStatus(status);
+        }
+
         LambdaQueryWrapper<TourOrder> wrapper = new LambdaQueryWrapper<>();
         if (keyword != null && !keyword.isBlank()) {
             wrapper.and(w -> w
@@ -229,6 +240,12 @@ public class OrderServiceImpl implements OrderService {
             route.setStatus("OPEN");
         }
         routeMapper.updateById(route);
+    }
+
+    private void validateStatus(String status) {
+        if (status == null || !VALID_STATUSES.contains(status)) {
+            throw BusinessException.badRequest("状态值只能是 PENDING、CONFIRMED、CANCELLED、REJECTED 或 COMPLETED");
+        }
     }
 
     private String getRouteName(Long routeId) {
