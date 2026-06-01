@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -21,5 +22,6 @@ public class CommentCreateRequest {
     private Integer rating;
 
     @NotBlank(message = "评论内容不能为空")
+    @Size(max = 500, message = "评论内容不能超过 500 字")
     private String content;
 }
