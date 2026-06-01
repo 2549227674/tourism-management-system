@@ -103,9 +103,11 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         if (announcement == null) {
             throw BusinessException.notFound("公告不存在");
         }
-        announcement.setStatus("PUBLISHED");
-        announcement.setPublishTime(LocalDateTime.now());
-        announcementMapper.updateById(announcement);
+        if (!"PUBLISHED".equals(announcement.getStatus())) {
+            announcement.setStatus("PUBLISHED");
+            announcement.setPublishTime(LocalDateTime.now());
+            announcementMapper.updateById(announcement);
+        }
         return AnnouncementDTO.fromEntity(announcement);
     }
 
