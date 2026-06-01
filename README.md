@@ -59,9 +59,11 @@ CREATE DATABASE tourism_management DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4
 执行脚本：
 
 ```bash
-mysql -u root -p tourism_management < database/schema.sql
-mysql -u root -p tourism_management < database/data.sql
+mysql -u tourism -p tourism_management < database/schema.sql
+mysql -u tourism -p tourism_management < database/data.sql
 ```
+
+> 默认数据库连接账号为 `tourism`/`tourism123`，对应 `backend/src/main/resources/application.yml` 中的配置。如本地 MySQL 账号不同，请同步修改该配置文件。
 
 ### 4.2 启动后端
 

@@ -28,9 +28,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### 数据库初始化
 
 ```bash
-mysql -u root -p -e "CREATE DATABASE tourism_management DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-mysql -u root -p tourism_management < database/schema.sql
-mysql -u root -p tourism_management < database/data.sql
+mysql -u tourism -p -e "CREATE DATABASE tourism_management DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+mysql -u tourism -p tourism_management < database/schema.sql
+mysql -u tourism -p tourism_management < database/data.sql
 ```
 
 ### 启动后端（需 JDK 17 + Maven）
