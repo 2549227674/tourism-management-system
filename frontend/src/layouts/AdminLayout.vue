@@ -2,28 +2,28 @@
   <el-container style="min-height: 100vh;">
     <el-aside width="220px" class="admin-aside">
       <div class="admin-logo">后台管理</div>
-      <el-menu :default-active="activeMenu" router background-color="#304156" text-color="#bfcbd9" active-text-color="#409eff">
+      <el-menu :default-active="activeMenu" background-color="#181d26" text-color="#bfcbd9" active-text-color="#409eff" @select="handleMenuSelect">
         <el-menu-item index="/admin/dashboard">
           <el-icon><data-analysis /></el-icon>
           <span>后台首页</span>
         </el-menu-item>
-        <el-menu-item index="/admin/spots" @click="notReady">
+        <el-menu-item index="spots">
           <el-icon><place /></el-icon>
           <span>景点管理</span>
         </el-menu-item>
-        <el-menu-item index="/admin/routes" @click="notReady">
+        <el-menu-item index="routes">
           <el-icon><map-location /></el-icon>
           <span>线路管理</span>
         </el-menu-item>
-        <el-menu-item index="/admin/orders" @click="notReady">
+        <el-menu-item index="orders">
           <el-icon><document /></el-icon>
           <span>订单管理</span>
         </el-menu-item>
-        <el-menu-item index="/admin/comments" @click="notReady">
+        <el-menu-item index="comments">
           <el-icon><chat-dot-round /></el-icon>
           <span>评论审核</span>
         </el-menu-item>
-        <el-menu-item index="/admin/announcements" @click="notReady">
+        <el-menu-item index="announcements">
           <el-icon><bell /></el-icon>
           <span>公告管理</span>
         </el-menu-item>
@@ -54,9 +54,12 @@ const auth = useAuthStore()
 
 const activeMenu = computed(() => route.path)
 
-function notReady(e) {
-  e.preventDefault()
-  ElMessage.info('后续阶段实现')
+function handleMenuSelect(index) {
+  if (index === '/admin/dashboard') {
+    router.push('/admin/dashboard')
+  } else {
+    ElMessage.info('后续阶段实现')
+  }
 }
 
 function handleLogout() {
