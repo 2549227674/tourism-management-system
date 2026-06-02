@@ -14,7 +14,10 @@ const routes = [
       { path: 'routes', name: 'RouteList', component: () => import('../views/RouteListView.vue') },
       { path: 'routes/:id', name: 'RouteDetail', component: () => import('../views/RouteDetailView.vue') },
       { path: 'announcements', name: 'AnnouncementList', component: () => import('../views/AnnouncementListView.vue') },
-      { path: 'announcements/:id', name: 'AnnouncementDetail', component: () => import('../views/AnnouncementDetailView.vue') }
+      { path: 'announcements/:id', name: 'AnnouncementDetail', component: () => import('../views/AnnouncementDetailView.vue') },
+      { path: 'my/orders', name: 'MyOrders', component: () => import('../views/MyOrdersView.vue'), meta: { requiresAuth: true } },
+      { path: 'my/favorites', name: 'MyFavorites', component: () => import('../views/MyFavoritesView.vue'), meta: { requiresAuth: true } },
+      { path: 'profile', name: 'Profile', component: () => import('../views/ProfileView.vue'), meta: { requiresAuth: true } }
     ]
   },
   {
@@ -40,6 +43,12 @@ router.beforeEach((to, from, next) => {
       next('/login')
     } else if (!auth.isAdmin()) {
       next('/')
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!auth.isLoggedIn()) {
+      next('/login')
     } else {
       next()
     }

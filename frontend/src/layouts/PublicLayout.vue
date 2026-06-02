@@ -9,6 +9,11 @@
             <el-menu-item index="/spots">景点</el-menu-item>
             <el-menu-item index="/routes">线路</el-menu-item>
             <el-menu-item index="/announcements">公告</el-menu-item>
+            <template v-if="auth.isLoggedIn()">
+              <el-menu-item index="/my/orders">我的订单</el-menu-item>
+              <el-menu-item index="/my/favorites">我的收藏</el-menu-item>
+              <el-menu-item index="/profile">个人中心</el-menu-item>
+            </template>
           </el-menu>
         </div>
         <div class="header-right">
@@ -55,6 +60,9 @@ const activeMenu = computed(() => {
   if (path.startsWith('/spots')) return '/spots'
   if (path.startsWith('/routes')) return '/routes'
   if (path.startsWith('/announcements')) return '/announcements'
+  if (path.startsWith('/my/orders')) return '/my/orders'
+  if (path.startsWith('/my/favorites')) return '/my/favorites'
+  if (path.startsWith('/profile')) return '/profile'
   return '/'
 })
 
