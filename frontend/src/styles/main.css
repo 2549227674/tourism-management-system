@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+  background-color: #ffffff;
+  color: #222222;
+}
+
+/* Element Plus primary color override (Airbnb Rausch) */
+:root {
+  --el-color-primary: #ff385c;
+  --el-color-primary-light-3: #ff6b87;
+  --el-color-primary-light-5: #ff9bad;
+  --el-color-primary-light-7: #ffc4d0;
+  --el-color-primary-light-8: #ffd9e0;
+  --el-color-primary-light-9: #ffedf0;
+  --el-color-primary-dark-2: #e00b41;
+}
+
+/* ===== Airbnb-style public pages ===== */
+:root {
+  --color-primary: #ff385c;
+  --color-primary-active: #e00b41;
+  --color-ink: #222222;
+  --color-body: #3f3f3f;
+  --color-muted: #6a6a6a;
+  --color-hairline: #dddddd;
+  --color-canvas: #ffffff;
+  --color-surface-soft: #f7f7f7;
+  --color-surface-strong: #f2f2f2;
+  --rounded-sm: 8px;
+  --rounded-md: 14px;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: var(--color-ink);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.card-grid .el-card {
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+  border-radius: var(--rounded-md);
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px, rgba(0, 0, 0, 0.1) 0 4px 8px;
+}
+
+.card-grid .el-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.06) 0 4px 12px, rgba(0, 0, 0, 0.15) 0 8px 16px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.stat-card .stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #181d26;
+}
+
+.stat-card .stat-label {
+  font-size: 14px;
+  color: #41454d;
+  margin-top: 8px;
+}
+
+.detail-section {
+  background: #fff;
+  padding: 32px;
+  border-radius: var(--rounded-md);
+  margin-bottom: 24px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px;
+}
+
+.detail-section h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--color-ink);
+}
+
+.detail-meta {
+  color: var(--color-muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.detail-content {
+  line-height: 1.8;
+  white-space: pre-wrap;
+  color: var(--color-body);
+}
