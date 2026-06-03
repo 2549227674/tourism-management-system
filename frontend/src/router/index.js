@@ -26,7 +26,8 @@ const routes = [
     meta: { requiresAdmin: true },
     children: [
       { path: 'dashboard', name: 'AdminDashboard', component: () => import('../views/admin/DashboardView.vue') },
-      { path: 'spots', name: 'AdminSpots', component: () => import('../views/admin/SpotManageView.vue') }
+      { path: 'spots', name: 'AdminSpots', component: () => import('../views/admin/SpotManageView.vue') },
+      { path: 'routes', name: 'AdminRoutes', component: () => import('../views/admin/RouteManageView.vue') }
     ]
   }
 ]

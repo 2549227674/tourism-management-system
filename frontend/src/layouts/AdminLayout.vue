@@ -11,7 +11,7 @@
           <el-icon><place /></el-icon>
           <span>景点管理</span>
         </el-menu-item>
-        <el-menu-item index="routes">
+        <el-menu-item index="/admin/routes">
           <el-icon><map-location /></el-icon>
           <span>线路管理</span>
         </el-menu-item>
@@ -59,6 +59,8 @@ function handleMenuSelect(index) {
     router.push('/admin/dashboard')
   } else if (index === '/admin/spots') {
     router.push('/admin/spots')
+  } else if (index === '/admin/routes') {
+    router.push('/admin/routes')
   } else {
     ElMessage.info('后续阶段实现')
   }
