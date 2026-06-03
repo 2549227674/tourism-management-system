@@ -1,0 +1,21 @@
+@startuml business-flow
+skinparam backgroundColor white
+skinparam defaultFontName "SimSun"
+
+rectangle "普通用户" as U
+rectangle "管理员" as A
+rectangle "景点/线路信息" as S
+rectangle "订单" as O
+rectangle "评论与收藏" as C
+rectangle "公告资讯" as N
+rectangle "统计数据" as T
+
+U --> S : 浏览
+U --> O : 提交预订
+U --> C : 评论/收藏
+A --> S : 维护
+A --> O : 处理
+A --> C : 审核
+A --> N : 发布
+A --> T : 查看
+@enduml

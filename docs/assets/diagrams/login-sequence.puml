@@ -1,0 +1,18 @@
+@startuml login-sequence
+skinparam backgroundColor white
+skinparam defaultFontName "SimSun"
+
+actor "用户" as U
+participant "前端" as F
+participant "后端" as B
+database "数据库" as DB
+
+U -> F : 输入用户名和密码
+F -> B : POST /api/auth/login
+B -> DB : 查询用户
+DB --> B : 返回用户信息
+B -> B : 校验密码和状态
+B --> F : 返回 token 和用户信息
+F -> F : 保存 token
+F --> U : 跳转首页或后台
+@enduml

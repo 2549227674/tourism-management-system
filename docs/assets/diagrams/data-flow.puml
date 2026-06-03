@@ -1,0 +1,33 @@
+@startuml data-flow
+skinparam backgroundColor white
+skinparam defaultFontName "SimSun"
+
+rectangle "普通用户" as U
+rectangle "管理员" as A
+rectangle "用户管理" as P1
+rectangle "信息浏览" as P2
+rectangle "订单预订" as P3
+rectangle "互动管理" as P4
+rectangle "基础数据管理" as P5
+rectangle "后台业务处理" as P6
+rectangle "公告管理" as P7
+rectangle "统计分析" as P8
+database "数据库" as D
+
+U --> P1 : 注册/登录/个人资料
+U --> P2 : 查询景点线路
+U --> P3 : 预订/取消
+U --> P4 : 评论/收藏
+A --> P5 : 维护景点线路
+A --> P6 : 审核/处理
+A --> P7 : 发布公告
+A --> P8 : 查看统计
+P1 --> D
+P2 --> D
+P3 --> D
+P4 --> D
+P5 --> D
+P6 --> D
+P7 --> D
+P8 --> D
+@enduml

@@ -1,0 +1,14 @@
+@startuml comment-audit-state
+skinparam backgroundColor white
+skinparam defaultFontName "SimSun"
+
+state "待审核" as PENDING
+state "已通过" as APPROVED
+state "已驳回" as REJECTED
+
+[*] --> PENDING : 用户提交评论
+PENDING --> APPROVED : 管理员审核通过
+PENDING --> REJECTED : 管理员驳回
+APPROVED --> [*]
+REJECTED --> [*]
+@enduml

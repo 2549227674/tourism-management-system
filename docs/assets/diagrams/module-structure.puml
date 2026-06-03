@@ -1,0 +1,58 @@
+@startuml module-structure
+skinparam backgroundColor white
+skinparam defaultFontName "SimSun"
+
+rectangle "旅游管理系统" as S
+rectangle "用户与权限模块" as M1
+rectangle "景点信息模块" as M2
+rectangle "旅游线路模块" as M3
+rectangle "订单预订模块" as M4
+rectangle "评论收藏模块" as M5
+rectangle "公告资讯模块" as M6
+rectangle "数据统计模块" as M7
+
+S --> M1
+S --> M2
+S --> M3
+S --> M4
+S --> M5
+S --> M6
+S --> M7
+
+rectangle "注册登录" as M11
+rectangle "个人信息" as M12
+rectangle "角色鉴权" as M13
+M1 --> M11
+M1 --> M12
+M1 --> M13
+
+rectangle "景点维护" as M21
+rectangle "景点浏览" as M22
+M2 --> M21
+M2 --> M22
+
+rectangle "线路维护" as M31
+rectangle "线路浏览" as M32
+M3 --> M31
+M3 --> M32
+
+rectangle "提交订单" as M41
+rectangle "取消订单" as M42
+rectangle "管理员处理" as M43
+M4 --> M41
+M4 --> M42
+M4 --> M43
+
+rectangle "收藏" as M51
+rectangle "评论审核" as M52
+M5 --> M51
+M5 --> M52
+
+rectangle "公告发布" as M61
+M6 --> M61
+
+rectangle "数量统计" as M71
+rectangle "金额统计" as M72
+M7 --> M71
+M7 --> M72
+@enduml

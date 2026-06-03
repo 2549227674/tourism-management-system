@@ -1,0 +1,119 @@
+@startuml er-diagram
+skinparam backgroundColor white
+skinparam defaultFontName "SimSun"
+
+entity "sys_user" as SYS_USER {
+  * id : BIGINT <<PK>>
+  --
+  username : VARCHAR(50) <<UNIQUE>>
+  password_hash : VARCHAR(100)
+  nickname : VARCHAR(50)
+  phone : VARCHAR(20)
+  email : VARCHAR(100)
+  avatar_url : VARCHAR(255)
+  role : VARCHAR(20)
+  status : VARCHAR(20)
+  created_at : DATETIME
+  updated_at : DATETIME
+}
+
+entity "spot_category" as SPOT_CATEGORY {
+  * id : BIGINT <<PK>>
+  --
+  name : VARCHAR(50) <<UNIQUE>>
+  sort_order : INT
+  status : VARCHAR(20)
+  created_at : DATETIME
+  updated_at : DATETIME
+}
+
+entity "scenic_spot" as SCENIC_SPOT {
+  * id : BIGINT <<PK>>
+  --
+  name : VARCHAR(100)
+  category_id : BIGINT <<FK>>
+  address : VARCHAR(255)
+  ticket_price : DECIMAL(10,2)
+  open_time : VARCHAR(100)
+  introduction : TEXT
+  image_url : VARCHAR(255)
+  status : VARCHAR(20)
+  created_at : DATETIME
+  updated_at : DATETIME
+}
+
+entity "tour_route" as TOUR_ROUTE {
+  * id : BIGINT <<PK>>
+  --
+  name : VARCHAR(100)
+  itinerary : TEXT
+  price : DECIMAL(10,2)
+  departure_time : DATETIME
+  quota : INT
+  booked_count : INT
+  status : VARCHAR(20)
+  cover_image_url : VARCHAR(255)
+  created_at : DATETIME
+  updated_at : DATETIME
+}
+
+entity "tour_order" as TOUR_ORDER {
+  * id : BIGINT <<PK>>
+  --
+  order_no : VARCHAR(32) <<UNIQUE>>
+  user_id : BIGINT <<FK>>
+  route_id : BIGINT <<FK>>
+  people_count : INT
+  contact_name : VARCHAR(50)
+  contact_phone : VARCHAR(20)
+  total_amount : DECIMAL(10,2)
+  status : VARCHAR(20)
+  remark : VARCHAR(255)
+  created_at : DATETIME
+  updated_at : DATETIME
+}
+
+entity "travel_comment" as TRAVEL_COMMENT {
+  * id : BIGINT <<PK>>
+  --
+  user_id : BIGINT <<FK>>
+  target_type : VARCHAR(20)
+  target_id : BIGINT
+  rating : INT
+  content : VARCHAR(500)
+  status : VARCHAR(20)
+  audit_remark : VARCHAR(255)
+  created_at : DATETIME
+  updated_at : DATETIME
+}
+
+entity "favorite" as FAVORITE {
+  * id : BIGINT <<PK>>
+  --
+  user_id : BIGINT <<FK>>
+  target_type : VARCHAR(20)
+  target_id : BIGINT
+  created_at : DATETIME
+}
+
+entity "announcement" as ANNOUNCEMENT {
+  * id : BIGINT <<PK>>
+  --
+  title : VARCHAR(100)
+  content : TEXT
+  status : VARCHAR(20)
+  publish_time : DATETIME
+  created_at : DATETIME
+  updated_at : DATETIME
+}
+
+SYS_USER ||--o{ TOUR_ORDER : "places"
+SYS_USER ||--o{ TRAVEL_COMMENT : "writes"
+SYS_USER ||--o{ FAVORITE : "owns"
+SPOT_CATEGORY ||--o{ SCENIC_SPOT : "classifies"
+TOUR_ROUTE ||--o{ TOUR_ORDER : "contains"
+SCENIC_SPOT ||--o{ TRAVEL_COMMENT : "receives"
+TOUR_ROUTE ||--o{ TRAVEL_COMMENT : "receives"
+SCENIC_SPOT ||--o{ FAVORITE : "collected"
+TOUR_ROUTE ||--o{ FAVORITE : "collected"
+@enduml

@@ -1,0 +1,15 @@
+@startuml system-proposal
+skinparam backgroundColor white
+skinparam defaultFontName "SimSun"
+
+rectangle "浏览器 /\n前端 Vue 3" as Browser
+rectangle "后端 Spring Boot\nREST API" as API
+rectangle "登录认证与\n权限控制" as Auth
+rectangle "业务服务层" as Service
+database "MySQL\n数据库" as DB
+
+Browser --> API
+API --> Auth
+API --> Service
+Service --> DB
+@enduml

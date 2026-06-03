@@ -1,0 +1,27 @@
+@startuml system-architecture
+skinparam backgroundColor white
+skinparam defaultFontName "SimSun"
+skinparam rectangleBorderColor #333333
+skinparam databaseBorderColor #333333
+
+rectangle "客户端" as Client {
+  rectangle "浏览器" as Browser
+  rectangle "Vue 3 前端应用" as Vue
+}
+
+rectangle "服务端" as Server {
+  rectangle "Controller\n接口层" as Controller
+  rectangle "Service\n业务层" as Service
+  rectangle "Mapper\n数据访问层" as Mapper
+  rectangle "认证与\n权限控制" as Auth
+}
+
+database "MySQL 数据库" as DB
+
+Browser --> Vue
+Vue --> Controller : HTTP JSON
+Controller --> Auth
+Controller --> Service
+Service --> Mapper
+Mapper --> DB
+@enduml
