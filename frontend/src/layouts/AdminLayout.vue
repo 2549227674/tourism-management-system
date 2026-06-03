@@ -7,7 +7,7 @@
           <el-icon><data-analysis /></el-icon>
           <span>后台首页</span>
         </el-menu-item>
-        <el-menu-item index="spots">
+        <el-menu-item index="/admin/spots">
           <el-icon><place /></el-icon>
           <span>景点管理</span>
         </el-menu-item>
@@ -57,6 +57,8 @@ const activeMenu = computed(() => route.path)
 function handleMenuSelect(index) {
   if (index === '/admin/dashboard') {
     router.push('/admin/dashboard')
+  } else if (index === 'spots') {
+    router.push('/admin/spots')
   } else {
     ElMessage.info('后续阶段实现')
   }
