@@ -19,7 +19,7 @@
           <el-icon><document /></el-icon>
           <span>订单管理</span>
         </el-menu-item>
-        <el-menu-item index="comments">
+        <el-menu-item index="/admin/comments">
           <el-icon><chat-dot-round /></el-icon>
           <span>评论审核</span>
         </el-menu-item>
@@ -63,6 +63,8 @@ function handleMenuSelect(index) {
     router.push('/admin/routes')
   } else if (index === '/admin/orders') {
     router.push('/admin/orders')
+  } else if (index === '/admin/comments') {
+    router.push('/admin/comments')
   } else {
     ElMessage.info('后续阶段实现')
   }
