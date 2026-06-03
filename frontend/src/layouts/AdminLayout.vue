@@ -23,7 +23,7 @@
           <el-icon><chat-dot-round /></el-icon>
           <span>评论审核</span>
         </el-menu-item>
-        <el-menu-item index="announcements">
+        <el-menu-item index="/admin/announcements">
           <el-icon><bell /></el-icon>
           <span>公告管理</span>
         </el-menu-item>
@@ -65,6 +65,8 @@ function handleMenuSelect(index) {
     router.push('/admin/orders')
   } else if (index === '/admin/comments') {
     router.push('/admin/comments')
+  } else if (index === '/admin/announcements') {
+    router.push('/admin/announcements')
   } else {
     ElMessage.info('后续阶段实现')
   }

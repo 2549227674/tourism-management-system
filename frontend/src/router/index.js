@@ -29,7 +29,8 @@ const routes = [
       { path: 'spots', name: 'AdminSpots', component: () => import('../views/admin/SpotManageView.vue') },
       { path: 'routes', name: 'AdminRoutes', component: () => import('../views/admin/RouteManageView.vue') },
       { path: 'orders', name: 'AdminOrders', component: () => import('../views/admin/OrderManageView.vue') },
-      { path: 'comments', name: 'AdminComments', component: () => import('../views/admin/CommentManageView.vue') }
+      { path: 'comments', name: 'AdminComments', component: () => import('../views/admin/CommentManageView.vue') },
+      { path: 'announcements', name: 'AdminAnnouncements', component: () => import('../views/admin/AnnouncementManageView.vue') }
     ]
   }
 ]
