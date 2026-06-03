@@ -69,7 +69,7 @@ mysql -u tourism -p tourism_management < database/data.sql
 
 ```bash
 cd backend
-mvn clean install
+mvn clean test
 mvn spring-boot:run
 ```
 
@@ -84,6 +84,7 @@ http://localhost:8080/api
 ```bash
 cd frontend
 npm install
+npm run build
 npm run dev
 ```
 
@@ -99,8 +100,7 @@ http://localhost:5173
 |---|---|---|
 | 管理员 | admin | admin123 |
 | 普通用户 | user01 | user123 |
-
-> 最终提交前请以 `database/data.sql` 中的真实账号为准。
+| 普通用户 | user02 | user123 |
 
 ## 6. 文档说明
 
@@ -148,14 +148,14 @@ http://localhost:5173
 
 ## 9. 课程交付清单
 
-- [ ] 可行性研究报告；
-- [ ] 需求分析规格说明书；
-- [ ] 软件设计规格说明书；
-- [ ] 项目总结报告；
-- [ ] 可运行软件源程序；
-- [ ] 数据库脚本；
-- [ ] 源程序说明与运行指南；
-- [ ] 测试用例与验收记录。
+- [x] 可行性研究报告；
+- [x] 需求分析规格说明书；
+- [x] 软件设计规格说明书；
+- [x] 项目总结报告；
+- [x] 可运行软件源程序；
+- [x] 数据库脚本；
+- [x] 源程序说明与运行指南；
+- [x] 测试用例与验收记录。
 
 ## 10. 许可说明
 
