@@ -97,7 +97,7 @@
           <el-input-number v-model="routeForm.quota" :min="1" style="width: 200px" />
         </el-form-item>
         <el-form-item label="已预订" prop="bookedCount">
-          <el-input-number v-model="routeForm.bookedCount" :min="0" style="width: 200px" />
+          <el-input-number v-model="routeForm.bookedCount" :min="0" :max="routeForm.quota || 0" style="width: 200px" />
         </el-form-item>
         <el-form-item label="封面图地址">
           <el-input v-model="routeForm.coverImageUrl" placeholder="请输入封面图 URL" />
@@ -143,7 +143,18 @@ const routeRules = {
   itinerary: [{ required: true, message: '请输入行程安排', trigger: 'blur' }],
   price: [{ required: true, message: '请输入价格', trigger: 'blur' }],
   departureTime: [{ required: true, message: '请选择出发时间', trigger: 'change' }],
-  quota: [{ required: true, message: '请输入名额', trigger: 'blur' }]
+  quota: [{ required: true, message: '请输入名额', trigger: 'blur' }],
+  bookedCount: [
+    { validator: (rule, value, callback) => {
+      if (value < 0) {
+        callback(new Error('已预订数量不能小于 0'))
+      } else if (routeForm.value.quota && value > routeForm.value.quota) {
+        callback(new Error('已预订数量不能大于总名额'))
+      } else {
+        callback()
+      }
+    }, trigger: 'blur' }
+  ]
 }
 
 const statusMap = { DRAFT: '草稿', OPEN: '开放预订', FULL: '名额已满', CLOSED: '已关闭' }
