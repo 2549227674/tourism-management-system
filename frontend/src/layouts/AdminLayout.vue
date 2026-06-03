@@ -15,7 +15,7 @@
           <el-icon><map-location /></el-icon>
           <span>线路管理</span>
         </el-menu-item>
-        <el-menu-item index="orders">
+        <el-menu-item index="/admin/orders">
           <el-icon><document /></el-icon>
           <span>订单管理</span>
         </el-menu-item>
@@ -61,6 +61,8 @@ function handleMenuSelect(index) {
     router.push('/admin/spots')
   } else if (index === '/admin/routes') {
     router.push('/admin/routes')
+  } else if (index === '/admin/orders') {
+    router.push('/admin/orders')
   } else {
     ElMessage.info('后续阶段实现')
   }

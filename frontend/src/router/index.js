@@ -27,7 +27,8 @@ const routes = [
     children: [
       { path: 'dashboard', name: 'AdminDashboard', component: () => import('../views/admin/DashboardView.vue') },
       { path: 'spots', name: 'AdminSpots', component: () => import('../views/admin/SpotManageView.vue') },
-      { path: 'routes', name: 'AdminRoutes', component: () => import('../views/admin/RouteManageView.vue') }
+      { path: 'routes', name: 'AdminRoutes', component: () => import('../views/admin/RouteManageView.vue') },
+      { path: 'orders', name: 'AdminOrders', component: () => import('../views/admin/OrderManageView.vue') }
     ]
   }
 ]
