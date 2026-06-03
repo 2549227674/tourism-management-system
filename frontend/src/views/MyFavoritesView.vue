@@ -2,7 +2,7 @@
   <div class="page-container">
     <h2 class="section-title">我的收藏</h2>
     <div class="filter-bar">
-      <el-select v-model="targetType" placeholder="全部类型" clearable style="width: 160px" @change="loadData">
+      <el-select v-model="targetType" placeholder="全部类型" clearable style="width: 160px" @change="handleTypeChange">
         <el-option label="全部" value="" />
         <el-option label="景点" value="SPOT" />
         <el-option label="线路" value="ROUTE" />
@@ -47,6 +47,11 @@ const total = ref(0)
 const loading = ref(false)
 
 function formatTime(t) { return t ? t.replace('T', ' ').substring(0, 16) : '' }
+
+function handleTypeChange() {
+  page.value = 1
+  loadData()
+}
 
 function goDetail(row) {
   if (row.targetType === 'SPOT') router.push(`/spots/${row.targetId}`)

@@ -2,7 +2,7 @@
   <div class="page-container">
     <h2 class="section-title">我的订单</h2>
     <div class="filter-bar">
-      <el-select v-model="status" placeholder="全部状态" clearable style="width: 160px" @change="loadData">
+      <el-select v-model="status" placeholder="全部状态" clearable style="width: 160px" @change="handleStatusChange">
         <el-option label="全部" value="" />
         <el-option label="待处理" value="PENDING" />
         <el-option label="已确认" value="CONFIRMED" />
@@ -61,6 +61,11 @@ const statusTagMap = { PENDING: 'warning', CONFIRMED: 'success', CANCELLED: 'inf
 function statusLabel(s) { return statusMap[s] || s }
 function statusTagType(s) { return statusTagMap[s] || 'info' }
 function formatTime(t) { return t ? t.replace('T', ' ').substring(0, 16) : '' }
+
+function handleStatusChange() {
+  page.value = 1
+  loadData()
+}
 
 async function loadData() {
   loading.value = true
