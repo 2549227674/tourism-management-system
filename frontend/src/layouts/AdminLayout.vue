@@ -57,7 +57,7 @@ const activeMenu = computed(() => route.path)
 function handleMenuSelect(index) {
   if (index === '/admin/dashboard') {
     router.push('/admin/dashboard')
-  } else if (index === 'spots') {
+  } else if (index === '/admin/spots') {
     router.push('/admin/spots')
   } else {
     ElMessage.info('后续阶段实现')
